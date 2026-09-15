@@ -795,6 +795,8 @@ type QueryKmKnowledgelistResponse struct {
 	Datalist *TreeDetailResponse `json:"datalist,omitempty" xml:"datalist,omitempty"`
 	// 总数据量
 	Totalrecords *int64 `json:"totalrecords,omitempty" xml:"totalrecords,omitempty"`
+	// 知识库树列表JSON数组(元素字段见语雀文档)
+	Trees *string `json:"trees,omitempty" xml:"trees,omitempty"`
 }
 
 func (s QueryKmKnowledgelistResponse) String() string {
@@ -827,6 +829,11 @@ func (s *QueryKmKnowledgelistResponse) SetDatalist(v *TreeDetailResponse) *Query
 
 func (s *QueryKmKnowledgelistResponse) SetTotalrecords(v int64) *QueryKmKnowledgelistResponse {
 	s.Totalrecords = &v
+	return s
+}
+
+func (s *QueryKmKnowledgelistResponse) SetTrees(v string) *QueryKmKnowledgelistResponse {
+	s.Trees = &v
 	return s
 }
 
@@ -3329,6 +3336,202 @@ func (s *RetrieveKgGraphResponse) SetEdges(v string) *RetrieveKgGraphResponse {
 	return s
 }
 
+type SortKmNodeRequest struct {
+	// OAuth模式下的授权token
+	AuthToken         *string `json:"auth_token,omitempty" xml:"auth_token,omitempty"`
+	ProductInstanceId *string `json:"product_instance_id,omitempty" xml:"product_instance_id,omitempty"`
+	// 知识库ID
+	TreeId *string `json:"tree_id,omitempty" xml:"tree_id,omitempty" require:"true"`
+	// 父节点ID(空为顶层)
+	ParentNodeId *string `json:"parent_node_id,omitempty" xml:"parent_node_id,omitempty"`
+	// 按新顺序排列的节点ID(逗号分隔)
+	NodeIds *string `json:"node_ids,omitempty" xml:"node_ids,omitempty" require:"true"`
+}
+
+func (s SortKmNodeRequest) String() string {
+	return tea.Prettify(s)
+}
+
+func (s SortKmNodeRequest) GoString() string {
+	return s.String()
+}
+
+func (s *SortKmNodeRequest) SetAuthToken(v string) *SortKmNodeRequest {
+	s.AuthToken = &v
+	return s
+}
+
+func (s *SortKmNodeRequest) SetProductInstanceId(v string) *SortKmNodeRequest {
+	s.ProductInstanceId = &v
+	return s
+}
+
+func (s *SortKmNodeRequest) SetTreeId(v string) *SortKmNodeRequest {
+	s.TreeId = &v
+	return s
+}
+
+func (s *SortKmNodeRequest) SetParentNodeId(v string) *SortKmNodeRequest {
+	s.ParentNodeId = &v
+	return s
+}
+
+func (s *SortKmNodeRequest) SetNodeIds(v string) *SortKmNodeRequest {
+	s.NodeIds = &v
+	return s
+}
+
+type SortKmNodeResponse struct {
+	// 请求唯一ID，用于链路跟踪和问题排查
+	ReqMsgId *string `json:"req_msg_id,omitempty" xml:"req_msg_id,omitempty"`
+	// 结果码，一般OK表示调用成功
+	ResultCode *string `json:"result_code,omitempty" xml:"result_code,omitempty"`
+	// 异常信息的文本描述
+	ResultMsg *string `json:"result_msg,omitempty" xml:"result_msg,omitempty"`
+	// 是否成功
+	Success *bool `json:"success,omitempty" xml:"success,omitempty"`
+}
+
+func (s SortKmNodeResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s SortKmNodeResponse) GoString() string {
+	return s.String()
+}
+
+func (s *SortKmNodeResponse) SetReqMsgId(v string) *SortKmNodeResponse {
+	s.ReqMsgId = &v
+	return s
+}
+
+func (s *SortKmNodeResponse) SetResultCode(v string) *SortKmNodeResponse {
+	s.ResultCode = &v
+	return s
+}
+
+func (s *SortKmNodeResponse) SetResultMsg(v string) *SortKmNodeResponse {
+	s.ResultMsg = &v
+	return s
+}
+
+func (s *SortKmNodeResponse) SetSuccess(v bool) *SortKmNodeResponse {
+	s.Success = &v
+	return s
+}
+
+type QueryKgGraphRequest struct {
+	// OAuth模式下的授权token
+	AuthToken         *string `json:"auth_token,omitempty" xml:"auth_token,omitempty"`
+	ProductInstanceId *string `json:"product_instance_id,omitempty" xml:"product_instance_id,omitempty"`
+	// 知识库ID
+	KbId *string `json:"kb_id,omitempty" xml:"kb_id,omitempty" require:"true"`
+	// 限定实体类型集合(逗号分隔)
+	EntityTypes *string `json:"entity_types,omitempty" xml:"entity_types,omitempty"`
+	// 限定关系类型集合(逗号分隔)
+	RelationTypes *string `json:"relation_types,omitempty" xml:"relation_types,omitempty"`
+	// 是否包含孤立节点
+	ShowIsolated *bool `json:"show_isolated,omitempty" xml:"show_isolated,omitempty"`
+	// 是否包含锚点节点
+	IncludeAnchors *bool `json:"include_anchors,omitempty" xml:"include_anchors,omitempty"`
+}
+
+func (s QueryKgGraphRequest) String() string {
+	return tea.Prettify(s)
+}
+
+func (s QueryKgGraphRequest) GoString() string {
+	return s.String()
+}
+
+func (s *QueryKgGraphRequest) SetAuthToken(v string) *QueryKgGraphRequest {
+	s.AuthToken = &v
+	return s
+}
+
+func (s *QueryKgGraphRequest) SetProductInstanceId(v string) *QueryKgGraphRequest {
+	s.ProductInstanceId = &v
+	return s
+}
+
+func (s *QueryKgGraphRequest) SetKbId(v string) *QueryKgGraphRequest {
+	s.KbId = &v
+	return s
+}
+
+func (s *QueryKgGraphRequest) SetEntityTypes(v string) *QueryKgGraphRequest {
+	s.EntityTypes = &v
+	return s
+}
+
+func (s *QueryKgGraphRequest) SetRelationTypes(v string) *QueryKgGraphRequest {
+	s.RelationTypes = &v
+	return s
+}
+
+func (s *QueryKgGraphRequest) SetShowIsolated(v bool) *QueryKgGraphRequest {
+	s.ShowIsolated = &v
+	return s
+}
+
+func (s *QueryKgGraphRequest) SetIncludeAnchors(v bool) *QueryKgGraphRequest {
+	s.IncludeAnchors = &v
+	return s
+}
+
+type QueryKgGraphResponse struct {
+	// 请求唯一ID，用于链路跟踪和问题排查
+	ReqMsgId *string `json:"req_msg_id,omitempty" xml:"req_msg_id,omitempty"`
+	// 结果码，一般OK表示调用成功
+	ResultCode *string `json:"result_code,omitempty" xml:"result_code,omitempty"`
+	// 异常信息的文本描述
+	ResultMsg *string `json:"result_msg,omitempty" xml:"result_msg,omitempty"`
+	// 结果是否被截断
+	Truncated *bool `json:"truncated,omitempty" xml:"truncated,omitempty"`
+	// 节点JSON数组(KbGraphNode字段定义见文档)
+	Nodes *string `json:"nodes,omitempty" xml:"nodes,omitempty"`
+	// 关系JSON数组(KbGraphEdge字段定义见文档)
+	Edges *string `json:"edges,omitempty" xml:"edges,omitempty"`
+}
+
+func (s QueryKgGraphResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s QueryKgGraphResponse) GoString() string {
+	return s.String()
+}
+
+func (s *QueryKgGraphResponse) SetReqMsgId(v string) *QueryKgGraphResponse {
+	s.ReqMsgId = &v
+	return s
+}
+
+func (s *QueryKgGraphResponse) SetResultCode(v string) *QueryKgGraphResponse {
+	s.ResultCode = &v
+	return s
+}
+
+func (s *QueryKgGraphResponse) SetResultMsg(v string) *QueryKgGraphResponse {
+	s.ResultMsg = &v
+	return s
+}
+
+func (s *QueryKgGraphResponse) SetTruncated(v bool) *QueryKgGraphResponse {
+	s.Truncated = &v
+	return s
+}
+
+func (s *QueryKgGraphResponse) SetNodes(v string) *QueryKgGraphResponse {
+	s.Nodes = &v
+	return s
+}
+
+func (s *QueryKgGraphResponse) SetEdges(v string) *QueryKgGraphResponse {
+	s.Edges = &v
+	return s
+}
+
 type QueryKnowledgeRagRequest struct {
 	// OAuth模式下的授权token
 	AuthToken         *string `json:"auth_token,omitempty" xml:"auth_token,omitempty"`
@@ -3718,7 +3921,7 @@ func (client *Client) DoRequest(version *string, action *string, protocol *strin
 				"req_msg_id":       antchainutil.GetNonce(),
 				"access_key":       client.AccessKeyId,
 				"base_sdk_version": tea.String("TeaSDK-2.0"),
-				"sdk_version":      tea.String("1.0.3"),
+				"sdk_version":      tea.String("1.0.4"),
 				"_prod_code":       tea.String("ENERGENT"),
 				"_prod_channel":    tea.String("default"),
 			}
@@ -4741,6 +4944,78 @@ func (client *Client) RetrieveKgGraphEx(request *RetrieveKgGraphRequest, headers
 	}
 	_result = &RetrieveKgGraphResponse{}
 	_body, _err := client.DoRequest(tea.String("1.0"), tea.String("antdigital.energent.kg.graph.retrieve"), tea.String("HTTPS"), tea.String("POST"), tea.String("/gateway.do"), tea.ToMap(request), headers, runtime)
+	if _err != nil {
+		return _result, _err
+	}
+	_err = tea.Convert(_body, &_result)
+	return _result, _err
+}
+
+// Description:
+//
+// Description: 同级目录树节点按序重排
+//
+// Summary: 同级目录树节点按序重排
+func (client *Client) SortKmNode(request *SortKmNodeRequest) (_result *SortKmNodeResponse, _err error) {
+	runtime := &util.RuntimeOptions{}
+	headers := make(map[string]*string)
+	_result = &SortKmNodeResponse{}
+	_body, _err := client.SortKmNodeEx(request, headers, runtime)
+	if _err != nil {
+		return _result, _err
+	}
+	_result = _body
+	return _result, _err
+}
+
+// Description:
+//
+// Description: 同级目录树节点按序重排
+//
+// Summary: 同级目录树节点按序重排
+func (client *Client) SortKmNodeEx(request *SortKmNodeRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *SortKmNodeResponse, _err error) {
+	_err = util.ValidateModel(request)
+	if _err != nil {
+		return _result, _err
+	}
+	_result = &SortKmNodeResponse{}
+	_body, _err := client.DoRequest(tea.String("1.0"), tea.String("antdigital.energent.km.node.sort"), tea.String("HTTPS"), tea.String("POST"), tea.String("/gateway.do"), tea.ToMap(request), headers, runtime)
+	if _err != nil {
+		return _result, _err
+	}
+	_err = tea.Convert(_body, &_result)
+	return _result, _err
+}
+
+// Description:
+//
+// Description: 知识图谱全图查询(节点与关系)
+//
+// Summary: 知识图谱全图查询(节点与关系)
+func (client *Client) QueryKgGraph(request *QueryKgGraphRequest) (_result *QueryKgGraphResponse, _err error) {
+	runtime := &util.RuntimeOptions{}
+	headers := make(map[string]*string)
+	_result = &QueryKgGraphResponse{}
+	_body, _err := client.QueryKgGraphEx(request, headers, runtime)
+	if _err != nil {
+		return _result, _err
+	}
+	_result = _body
+	return _result, _err
+}
+
+// Description:
+//
+// Description: 知识图谱全图查询(节点与关系)
+//
+// Summary: 知识图谱全图查询(节点与关系)
+func (client *Client) QueryKgGraphEx(request *QueryKgGraphRequest, headers map[string]*string, runtime *util.RuntimeOptions) (_result *QueryKgGraphResponse, _err error) {
+	_err = util.ValidateModel(request)
+	if _err != nil {
+		return _result, _err
+	}
+	_result = &QueryKgGraphResponse{}
+	_body, _err := client.DoRequest(tea.String("1.0"), tea.String("antdigital.energent.kg.graph.query"), tea.String("HTTPS"), tea.String("POST"), tea.String("/gateway.do"), tea.ToMap(request), headers, runtime)
 	if _err != nil {
 		return _result, _err
 	}
